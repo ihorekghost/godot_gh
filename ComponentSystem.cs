@@ -4,7 +4,6 @@ namespace GH
     {
         using Godot;
 
-
         public static class NodeExtensions
         {
             public static TComponent GetComponent<TComponent>(this Node node) where TComponent : Node
