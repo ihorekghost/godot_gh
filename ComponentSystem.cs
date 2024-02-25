@@ -1,21 +1,26 @@
-using Godot;
-using System;
-using System.Runtime.CompilerServices;
-
 namespace GH
 {
     namespace ComponentSystem
     {
+        using Godot;
+
+
         public static class NodeExtensions
         {
-            public static T GetComponent<T>(this Node node) where T : Node
+            public static TComponent GetComponent<TComponent>(this Node node) where TComponent : Node
             {
-                return node.GetNodeOrNull<T>(typeof(T).Name);
+                IComponentCacher<TComponent> cacher = node as IComponentCacher<TComponent>;
+                if (cacher == null)
+                {
+                    return node.GetNodeOrNull<TComponent>(typeof(TComponent).Name);
+                }
+
+                return cacher.CachedComponent;
             }
 
-            public static T AddComponent<T>(this Node node, T component) where T : Node
+            public static TComponent AddComponent<TComponent>(this Node node, TComponent component) where TComponent : Node
             {
-                component.Name = typeof(T).Name;
+                component.Name = typeof(TComponent).Name;
                 node.AddChild(component);
                 return component;
             }
