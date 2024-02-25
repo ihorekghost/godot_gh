@@ -1,11 +1,9 @@
-using Godot;
-using System;
-
-
 namespace GH
 {
     namespace SceneManager
     {
+        using Godot;
+
         [GlobalClass]
         public partial class SceneManager : Node
         {
@@ -21,8 +19,6 @@ namespace GH
             {
                 CallDeferred(MethodName.SwitchScene, newSceneNode);
             }
-
-
 
             public void SwitchScene(Node newSceneNode)
             {
